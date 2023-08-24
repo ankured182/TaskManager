@@ -1,0 +1,101 @@
+﻿@model IEnumerable<TaskManager.Models.TaskMain>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskDescrp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Projects)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Modules)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssignedTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateCreated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IntendedStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DurationHrs)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActualDateStarted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActualDateEnded)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskDescrp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Projects.ProjectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Modules.ModuleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssignedTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreated)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IntendedStartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DurationHrs)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActualDateStarted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActualDateEnded)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

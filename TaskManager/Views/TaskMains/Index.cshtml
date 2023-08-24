@@ -1,0 +1,174 @@
+﻿@model IEnumerable<TaskManager.Models.TaskMain>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="col-md-12">
+    <h5>Task List  <small><a asp-action="Create"> Create New</a></small>   </h5>  
+    
+</div>
+
+@*<label></label>*@
+
+@*<p>
+    
+</p>*@
+<table class="table"  style="font-size:13px">
+    <thead>
+        <tr>
+            <th>
+                Sl
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskName)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.TaskPriorities)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Projects)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Modules)
+            </th>
+          @*  <th>
+                @Html.DisplayNameFor(model => model.CreateBy)/
+                @Html.DisplayNameFor(model => model.AssignedTo)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentStatus)
+            </th>
+       @*   <th>
+                @Html.DisplayNameFor(model => model.DateCreated)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.DurationHrs)
+            </th>
+             
+            <th>
+                @Html.DisplayNameFor(model => model.IntendedStartDate)
+            </th>
+               <th>
+                @Html.DisplayNameFor(model => model.ActualDateStarted)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        @{ int i=1;
+        @foreach (var item in Model) 
+{
+               
+                string FontColor = "Color:darkblue";
+     if (item.Projects.ProjectId==1)
+    {
+         FontColor = "Color:darkgreen";
+    }    
+    else if (item.Projects.ProjectId==2)
+    {
+        FontColor = "Color:darkred";
+    }
+   
+    string priorityFontColor = "Color:darkblue";
+     if (item.TaskPriorities.PriorityId==1)
+    {
+         FontColor = "Color:blue";
+    }    
+    else if (item.TaskPriorities.PriorityId==2)
+    {
+        FontColor = "Color:purple";
+    }
+
+     else if (item.TaskPriorities.PriorityId==3)
+    {
+        FontColor = "Color:darkorange";
+    }
+   
+    if(item.CurrentStatus=="Started")
+                {
+                     FontColor = "Color:red";
+                }
+
+  
+                   <tr style="@FontColor" >
+            
+                    <td>
+                           @i 
+                      
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TaskName)
+                    </td>
+                     <td>
+                       <div style="font-weight:bold">
+                        @Html.DisplayFor(modelItem => item.TaskPriorities.PriorityName)
+                          </div>
+                    </td>
+
+                    <td>
+                        @if(item.Projects.ProjectId==1)
+                {
+                            <div style="color:darkgreen;font-weight:bold">
+                           @Html.DisplayFor(modelItem => item.Projects.ProjectName)
+                           </div>
+                }
+                else if(item.Projects.ProjectId==2)
+                {
+                             <div style="color:darkred;font-weight:bold">
+                           @Html.DisplayFor(modelItem => item.Projects.ProjectName)
+                           </div>
+                }
+                  else 
+                {
+                             <div style="color:darkblue;font-weight:bold">
+                           @Html.DisplayFor(modelItem => item.Projects.ProjectName)
+                           </div>
+                }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Modules.ModuleName)
+                    </td>
+                 
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CurrentStatus)
+                    </td>
+                
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DurationHrs)
+                    </td>
+
+                      <td>
+                        @Html.DisplayFor(modelItem => item.IntendedStartDate)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ActualDateStarted)
+                    </td>
+                   
+                    <td>
+                       <a asp-action="Edit" asp-controller="TaskProcess" asp-route-id="@item.Id">P</a> 
+
+                             <a asp-action="Details" asp-route-id="@item.Id">View</a> 
+
+                            @if (item.CreateBy == User.Identity.Name)
+                    {        <a asp-action="Edit" asp-route-id="@item.Id"><span class="ic">E</span></a>
+                             
+
+                             <a asp-action="Delete" asp-route-id="@item.Id">X</a>
+                    }
+
+                    
+                          
+
+                    </td>
+                </tr>
+                 i = i + 1;
+}
+
+    }
+     </tbody>
+</table>
